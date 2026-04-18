@@ -1,0 +1,8 @@
+{
+  "name": "LuxeVault: Premium Branding & Outlet Hub",
+  "description": "A premium minimalist dashboard for luxury brand management with a strong blue and black aesthetic, featuring AI-driven market intelligence and voice commands.",
+  "requestFramePermissions": [
+    "microphone"
+  ],
+  "majorCapabilities": []
+}

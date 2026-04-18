@@ -1,0 +1,74 @@
+{
+  "entities": {
+    "users": {
+      "title": "User Profile",
+      "description": "Information about the authenticated user.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "judge", "user"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "role"]
+    },
+    "judging_systems": {
+      "title": "Judging System Configuration",
+      "description": "Configuration for the system judgment logic.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "status": { "type": "string", "enum": ["active", "draft", "retired"] },
+        "config": { "type": "object" },
+        "createdBy": { "type": "string" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "status"]
+    },
+    "user_logs": {
+      "title": "User Action Log",
+      "description": "Chronicle of user interactions within the system.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "action": { "type": "string" },
+        "details": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "action", "timestamp"]
+    },
+    "user_settings": {
+      "title": "User Custom Settings",
+      "description": "Personalized configuration for the user interface.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "notifications": { "type": "boolean" },
+        "favoriteCategory": { "type": "string" },
+        "compactView": { "type": "boolean" }
+      },
+      "required": ["uid"]
+    }
+  },
+  "firestore": {
+    "users/{userId}": {
+      "schema": "users",
+      "description": "User profile data."
+    },
+    "judgments_config/{configId}": {
+      "schema": "judging_systems",
+      "description": "Judging system configuration."
+    },
+    "users/{userId}/logs/{logId}": {
+      "schema": "user_logs",
+      "description": "Specific action logs for a user."
+    },
+    "users/{userId}/settings/current": {
+      "schema": "user_settings",
+      "description": "Personalized settings for a user."
+    }
+  }
+}
